@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Brauhaus-Fall">
-<title>Das Brauhaus-Komplotts &ndash; Köln-Krimi-Rallye</title>
+<title>Das große Chaos des Monsieur Tintenklecks &ndash; Brüssel-Rätsel-Rallye</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -256,11 +256,13 @@
 
   <!-- WILLKOMMEN -->
   <section class="screen active" id="screen-welcome">
-    <div class="eyebrow">Kölner Polizeidirektion &middot; Akte D-1164</div>
-    <h1>Das Brauhaus-Komplotts</h1>
-    <p> Heute Nacht ist im Traditionsbrauhaus "Früh am Dom" das unbezahlbare, goldene Original-Brauereisiegel aus der Gründerzeit verschwunden &ndash; das historische Prachtstück, das seit vielen Jahren die Kölner Biergeschichte feiert und gut behütet im Zappes-Beichtgestühl ausgestellt war.</p>
-    <p>Dem langjährigen Köbes Anton kommt das Ganze verdächtig vor: Schon früher gab es Versuche, an die geheimen Rezepte und Schätze des Brauhauses zu gelangen. Diesmal soll der Dieb jedoch nicht ungeschoren davonkommen. Er bittet dich diskret um Hilfe, bevor die Sache für Unruhe sorgt.</p>
-    <p>Die Spur des Täters führt quer durch die Kölner Altstadt &ndash; von geschichtsträchtigen Brauhaus-Ecken zu den großen Wahrzeichen der Stadt. An jedem Ort wartet ein Rätsel, das sich nur lösen lässt, wenn du wirklich dort stehst.</p> 
+    <div class="eyebrow">Brüssel Stadtarchiv &middot; Akte D-1164</div>
+    <h1>Das große Chaos des Monsieur Tintenklecks</h1>
+    <p style="font-weight: bold;"> Willkommen in Brüssel – der einzigen Stadt, in der selbst ein winziger Bronzejunge mehr Outfits im Schrank hat als ihr, und ein Justizpalast so riesig ist, dass man darin ein eigenes GPS braucht!</p>
+    <p>Eigentlich sollte heute ein großer Tag werden: Monsieur Gaston Tintenklecks – selbsternannter Hüter des gepflegten Schabernacks und Teilzeit-Chronist – wollte Brüssel ein „absolut legendäres, weltbewegendes Geheimnis“ hinterlassen. Das Problem: Gaston hat ein Gedächtnis wie ein Sieb, eine dramatische Ader wie eine Seifenoper und ein Talent dafür, Dinge viel zu kompliziert zu machen.</p>
+    <p>Statt eines simplen Schatzes hat er quer durch die Stadt eine absurde Schnitzeljagd aus halbgaren Codes, überraschenden Fakten und kniffligen Rätseln verteilt – inklusive einer Warnung, dass ein geheimer „Gegenspieler“ (vermutlich eine Taube mit zu viel Selbstbewusstsein) angeblich scharf auf das Finale ist.</p>
+    <p>Nur wer zwischen prunkvollen Fassaden, wilden Comics und völlig übertriebener Architektur nicht den Verstand verliert und jedes Rätsel knackt, ergattert die Koordinaten für den nächsten Stopp. Am Ende wartet an einem alten Stadttor die große Auflösung – oder zumindest eine ziemlich gute Pointe. Auf die Plätze, fertig, Kopfschütteln! Startet beim Manneken Pis und stürzt euch ins Brüsseler Abenteuer!</p> 
+    <img src="bilder/foto1.jfif" alt="Beschreibung des Bildes" style="margin:16px 0; border-radius:2px; border:1px solid var(--border);">
     <div style="flex:1"></div>
     <button class="btn primary" onclick="showScreen('rules')">Zu den Ermittlungsregeln</button>
   </section>
@@ -270,7 +272,7 @@
     <div class="eyebrow">Vor der Ermittlung</div>
     <h2>Ermittlungsregeln</h2>
     <ul class="rules-list">
-      <li><span class="num">01</span> 10 Rätsel führen dich zu echten Orten in der Kölner Altstadt &ndash; jede Station liegt maximal 1,5&nbsp;km von der vorherigen entfernt.</li>
+      <li><span class="num">01</span> 10 Rätsel führen dich zu echten Orten in der Brüsseler Innenstadt &ndash; jede Station liegt maximal 1,5&nbsp;km von der vorherigen entfernt.</li>
       <li><span class="num">02</span> Jedes Rätsel dreht sich um ein Detail, das du nur vor Ort sehen kannst. Ohne den Ort zu besuchen, gibt es keine Chance auf die Lösung.</li>
       <li><span class="num">03</span> Sobald du auf Start tippst, läuft die Zeit &ndash; bis das letzte Rätsel gelöst ist.</li>
       <li><span class="num">04</span> Nach jedem gelösten Rätsel bekommst du GPS-Koordinaten für den nächsten Ort. Kopiere sie per Knopfdruck und füge sie in Google Maps ein.</li>
@@ -317,12 +319,12 @@
     <button class="btn ghost" onclick="resetGame()">Neue Ermittlung starten</button>
   </section>
 
-  <footer class="credit">Köln-Krimi-Rallye &middot; läuft lokal im Browser</footer>
+  <footer class="credit">Brüssel-Rätsel-Rallye &middot; läuft lokal im Browser</footer>
 </div>
 
 <script>
 /* ============================================================
-   INHALT: Echte Kölner Orte mit verifizierten Fakten.
+   INHALT: Echte Brüsseler Orte mit verifizierten Fakten.
    Jedes Rätsel ist so gebaut, dass die Antwort nur vor Ort
    sichtbar/prüfbar ist (Zählen, Lesen, Beobachten).
    Passt die Route jederzeit an eure Zielgruppe an - Distanzen
@@ -331,13 +333,13 @@
 const PUZZLES = [
   {
     distFromPrev: null,
-    scene: "Du betrittst das geschäftige Treiben des Brauhauses 'Früh am Dom'. Zwischen dem Klirren von Kölschgläsern und dem Duft von Halve Hahn wartet Köbes Pitter auf dich. Er wischt nervös über die Theke. 'Hück Naach hat einer minge joldene Brauhausschlüssel jeklaut!', flüstert er dir zu. Er zeigt auf einen historischen hölzernen Kölsch-Kranz, der als Deko an der Wand hängt. Darauf ist das stolze Gründungsjahr der Brauerei verewigt. 'Dä Dieb hat mir en Notiz hingerloof – als Quersumme vum Jründungsjahr!'",
-    onsite: "Finde das Gründungsjahr der Brauerei 'Früh am Dom' heraus (z. B. auf Schildern, Bierdeckeln oder der Speisekarte).",
-    riddle: "In welchem Jahr wurde die Brauerei Früh gegründet? Addiere die vier Ziffern dieser Jahreszahl, um die Quersumme zu erhalten.",
-    hint: "Das Früh am Dom wurde im Jahr 1904 gegründet. Rechne 1+9+0+4.",
-    answers: ["14"],
-    solved: "14 - richtig. Köbes Pitter atmet auf und gibt dir einen Zettel, den der Dieb verloren hat: Es ist eine Quittung für ein Vorhängeschloss. Die Spur führt an den Rhein, zur Brücke der Liebenden.",
-    nextCoords: {lat:"50.941436", lon:"6.965784", label:"Hohenzollernbrücke", distKm:"0,3"}
+    scene: "Ihr steht an einer der wohl berühmtesten Straßenecken der Welt – und schaut erstmal auf einen kleinen Mann. Denn Brüssels größter Superstar ist gerade einmal rund 55 Zentimeter klein, besteht aus Bronze und erledigt seit Jahrhunderten völlig ungeniert sein kleines Geschäft in der Öffentlichkeit. An einem Gitterstab klebt ein leicht zerknitterter Umschlag mit einem Wachssiegel, auf dem eine Ente im Smoking abgebildet ist. Darin liegt eine Nachricht von Monsieur Gaston Tintenklecks: 'Willkommen am Tatort des gepflegten Schabernacks! Mein erster Hinweis ist so winzig wie der Kerl hier, aber sein Kleiderschrank ist größer als jedes Einkaufszentrum: Über 1.100 Kostüme besitzt der kleine Bengel inzwischen! Doch bevor ihr euch von seinem Charme ablenken lasst: Mein Erzrivale – eine äußerst arrogante Brüsseler Stadttaube namens Henri – hat versucht, das Entstehungsjahr dieser berühmten Bronzestatue aus meinem Notizbuch zu picken. Zum Glück habe ich mir gemerkt, dass der Bildhauer Jérôme Duquesnoy der Ältere dieses Meisterwerk kurz nach Beginn des Dreißigjährigen Krieges gegossen hat.'",
+    onsite: "Schaut euch das Manneken Pis genau an (und achtet darauf, ob er heute eines seiner über 1.100 Kostüme trägt oder ganz klassisch 'unten ohne' dasteht). Prüft die Infotafel oder das Baujahr der heutigen Bronzefigur.",
+    riddle: "Wer passt auf die Bronzestatue des Manneken Pis vom Bildhauer Jérôme Duquesnoy auf? In der Vergangenheit wurde die Statue immer wieder belästigt und beschädigt.",
+    hint: "Links und Rechts befinden sich Schilder mit der Aufschrift die einen bedeuten Hinweis geben.",
+    answers: ["Camera", "Überwachungskameras", "Kamera", "Kameras", "Überwachungskamera","Camera Security"],
+    solved: "Kameras – Volltreffer! Kaum habt ihr das Lösungswort eingetippt, flattert tatsächlich eine verdächtig dicke Taube auf das Dach gegenüber und gurrt beleidigt. Auf der Rückseite von Gastons Notiz erscheint eine neue Zeile: 'Nicht schlecht! Aber wer nur auf kleine Brunnenfiguren starrt, übersieht den größten Prunk der Stadt. Bewegt euch dorthin, wo einst schon Victor Hugo aus dem Staunen nicht mehr herauskam und wo Goldfassaden um die Wette glänzen!'",
+    nextCoords: {lat:"50.846733", lon:"4.352472", label:"Grote Markt (Grand-Place)", distKm:"0,3"}
   },
   {
     scene: "An der Hohenzollernbrücke hängen hunderttausende Liebesschlösser am Geländer, seit 2008 ein fester Kölner Brauch. Doch dich interessiert etwas anderes: die Brücke selbst, direkt neben dir.",
