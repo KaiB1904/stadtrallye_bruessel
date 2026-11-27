@@ -257,20 +257,19 @@
   <!-- WILLKOMMEN -->
   <section class="screen active" id="screen-welcome">
     <div class="eyebrow">Brüssel Stadtarchiv &middot; Akte D-1164</div>
-    <h1>Das große Chaos des Monsieur Tintenklecks</h1>
-    <p style="font-weight: bold;"> Willkommen in Brüssel – der einzigen Stadt, in der selbst ein winziger Bronzejunge mehr Outfits im Schrank hat als ihr, und ein Justizpalast so riesig ist, dass man darin ein eigenes GPS braucht!</p>
-    <p>Eigentlich sollte heute ein großer Tag werden: Monsieur Gaston Tintenklecks – selbsternannter Hüter des gepflegten Schabernacks und Teilzeit-Chronist – wollte Brüssel ein „absolut legendäres, weltbewegendes Geheimnis“ hinterlassen. Das Problem: Gaston hat ein Gedächtnis wie ein Sieb, eine dramatische Ader wie eine Seifenoper und ein Talent dafür, Dinge viel zu kompliziert zu machen.</p>
-    <p>Statt eines simplen Schatzes hat er quer durch die Stadt eine absurde Schnitzeljagd aus halbgaren Codes, überraschenden Fakten und kniffligen Rätseln verteilt.</p>
-    <p>Nur wer zwischen prunkvollen Fassaden, wilden Comics und völlig übertriebener Architektur nicht den Verstand verliert und jedes Rätsel knackt, ergattert die Koordinaten für den nächsten Stopp. Am Ende wartet an einem alten Stadttor die große Auflösung – oder zumindest eine ziemlich gute Pointe. Auf die Plätze, fertig, hoppala! Startet beim Manneken Pis und stürzt euch ins Brüsseler Abenteuer!</p> 
+    <h1>Ein Möbelstück für Brüssel</h1>
+    <p style="font-weight: bold;"> Willkommen in Brüssel – einer Stadt voller Kontraste, prunkvoller Linien und skurriler Ideen.</p>
+    <p>Monsieur Gaston Tintenklecks ist kein gewöhnlicher Tischler: Er ist ein leidenschaftlicher, leicht zerstreuter Möbelbauer mit einem Faible für ungewöhnliche Formen. Seine neueste Mission: ein einzigartiges Möbelstück entwerfen, das den Geist Brüssels einfängt – von winzigen Details bis zu gewaltigen Dimensionen.</p>
+    <p>Doch Gaston hat ein Problem: Seine Skizzen und Design-Notizen liegen quer über die Stadt verstreut, weil ihn an jedem Ort sofort ein neuer Einfall gepackt hat. Folgt seinen Spuren, schaut genau hin und sammelt die Design-Hinweise vor Ort. Am Ende wartet der fertige Entwurf auf euch!</p>
     <img src="bilder/foto1.jfif" alt="Beschreibung des Bildes" style="margin:16px 0; border-radius:2px; border:1px solid var(--border);">
     <div style="flex:1"></div>
-    <button class="btn primary" onclick="showScreen('rules')">Zu den Ermittlungsregeln</button>
+    <button class="btn primary" onclick="showScreen('rules')">Zu den Regeln</button>
   </section>
 
   <!-- REGELN -->
   <section class="screen" id="screen-rules">
-    <div class="eyebrow">Vor der Ermittlung</div>
-    <h2>Ermittlungsregeln</h2>
+    <div class="eyebrow">Vor der Rallye</div>
+    <h2>Regeln</h2>
     <ul class="rules-list">
       <li><span class="num">01</span> 10 Rätsel führen dich zu echten Orten in der Brüsseler Innenstadt &ndash; jede Station liegt maximal 1,5&nbsp;km von der vorherigen entfernt.</li>
       <li><span class="num">02</span> Jedes Rätsel dreht sich um ein Detail, das du nur vor Ort sehen kannst. Ohne den Ort zu besuchen, gibt es keine Chance auf die Lösung.</li>
@@ -295,7 +294,7 @@
         <div class="tabs" id="tabs"></div>
       </div>
       <div style="text-align:right;">
-        <div class="label">Ermittlungszeit</div>
+        <div class="label">Zeit</div>
         <div id="timer">00:00:00</div>
       </div>
     </div>
@@ -309,14 +308,24 @@
   <!-- FINALE -->
   <section class="screen" id="screen-finished">
     <div class="eyebrow">Abenteuer abgeschlossen</div>
-    <h1 id="finishedTitle">Das Rätsel ist gelöst</h1>
+    <h1 id="finishedTitle">Der Entwurf ist vollständig</h1>
     <div class="card" id="finishedStory"></div>
+    <img src="bilder/skizze.jfif" alt="Beschreibung des Bildes" style="margin:16px 0; border-radius:2px; border:1px solid var(--border);">
     <div class="card" style="text-align:center;">
       <div class="eyebrow" style="margin-bottom:4px;">Gesamtzeit</div>
       <div style="font-family:'JetBrains Mono',monospace; font-size:32px; color:var(--amber); font-weight:600;" id="finalTime">00:00:00</div>
     </div>
+    <div class="coord-box">
+        <div class="coord-label">Erholungsort: Pardon Brussels</div>
+        <div class="coord-value">50.831293, 4.346080</div>
+        <div class="coord-dist">ca. 0,25 km Fußweg von hier</div>
+        <div class="coord-actions">
+          <button id="copyBtn">In Zwischenablage kopieren</button>
+          <a href="https://www.google.com/maps/search/?api=1&query=50.831293,4.346080" target="_blank" rel="noopener">In Google Maps öffnen</a>
+        </div>
+      </div>
     <div style="flex:1"></div>
-    <button class="btn ghost" onclick="resetGame()">Neue Ermittlung starten</button>
+    <button class="btn ghost" onclick="resetGame()">Neues Abenteuer starten</button>
   </section>
 
   <footer class="credit">Brüssel-Rätsel-Rallye &middot; läuft lokal im Browser</footer>
@@ -333,107 +342,107 @@
 const PUZZLES = [
   {
     distFromPrev: null,
-    scene: "Ihr steht an einer der wohl berühmtesten Straßenecken der Welt – und schaut erstmal auf einen kleinen Mann. Denn Brüssels größter Superstar ist gerade einmal rund 55 Zentimeter klein, besteht aus Bronze und erledigt seit Jahrhunderten völlig ungeniert sein kleines Geschäft in der Öffentlichkeit. An einem Gitterstab klebt ein leicht zerknitterter Umschlag mit einem Wachssiegel, auf dem eine Ente im Smoking abgebildet ist. Darin liegt eine Nachricht von Monsieur Gaston Tintenklecks: 'Willkommen am Tatort des gepflegten Schabernacks! Mein erster Hinweis ist so winzig wie der Kerl hier, aber sein Kleiderschrank ist größer als jedes Einkaufszentrum: Über 1.100 Kostüme besitzt der kleine Bengel inzwischen! Doch bevor ihr euch von seinem Charme ablenken lasst: Mein Erzrivale – eine äußerst arrogante Brüsseler Stadttaube namens Henri – hat versucht, das Entstehungsjahr dieser berühmten Bronzestatue aus meinem Notizbuch zu picken. Zum Glück habe ich mir gemerkt, dass der Bildhauer Jérôme Duquesnoy der Ältere dieses Meisterwerk kurz nach Beginn des Dreißigjährigen Krieges gegossen hat.'",
-    onsite: "Schaut euch das Manneken Pis genau an (und achtet darauf, ob er heute eines seiner über 1.100 Kostüme trägt oder ganz klassisch 'unten ohne' dasteht). Prüft die Umgebung an der Bronzefigur.",
-    riddle: "Wer passt auf die Bronzestatue des Manneken Pis vom Bildhauer Jérôme Duquesnoy auf? In der Vergangenheit wurde die Statue immer wieder belästigt und beschädigt.",
-    hint: "Links und Rechts befinden sich Schilder mit der Aufschrift die einen bedeuten Hinweis geben.",
-    answers: ["Camera", "Überwachungskameras", "Kamera", "Kameras", "Überwachungskamera","Camera Security"],
-    solved: "Kameras – Volltreffer! Kaum habt ihr das Lösungswort eingetippt, flattert tatsächlich eine verdächtig dicke Taube auf das Dach gegenüber und gurrt beleidigt. Auf der Rückseite von Gastons Notiz erscheint eine neue Zeile: 'Nicht schlecht! Aber wer nur auf kleine Brunnenfiguren starrt, übersieht den größten Prunk der Stadt. Bewegt euch dorthin, wo einst schon Victor Hugo aus dem Staunen nicht mehr herauskam und wo Goldfassaden um die Wette glänzen!'",
+    scene: "Ihr steht an einer der wohl berühmtesten Straßenecken der Welt – und schaut erstmal auf einen kleinen Mann. Denn Brüssels größter Superstar ist gerade einmal rund 55 Zentimeter klein, besteht aus Bronze und erledigt seit Jahrhunderten völlig ungeniert sein kleines Geschäft in der Öffentlichkeit. An einem Gitterstab klebt ein leicht zerknitterter Umschlag mit einer kleinen Bleistiftskizze eines winzigen Hockers darauf. Darin liegt eine Nachricht von Monsieur Gaston Tintenklecks: 'Willkommen in meinem Freiluft-Atelier! Ich bin auf der Suche nach der perfekten Idee für ein neues Möbelstück, das den Geist Brüssels einfängt. Hier lerne ich meine erste Lektion über Maßstäbe: Größe ist nicht alles! Selbst dieser Winzling hat über 1.100 Kostüme im Schrank – mein Entwurf braucht also unbedingt raffinierte, austauschbare Elemente!'",
+    onsite: "Schaut euch das Manneken Pis genau an (und achtet darauf, ob er heute eines seiner über 1.100 Kostüme trägt oder ganz klassisch 'unten ohne' dasteht). Prüft die direkt am Gitter angebrachten Hinweisschilder links und rechts der Statue.",
+    riddle: "Wer oder was passt laut den Schildern direkt links und rechts neben dem Gitter auf die wertvolle Bronzestatue des Manneken Pis auf?",
+    hint: "Schaut auf die kleinen Piktogramm-Schilder links und rechts am Gitter – dort ist ein elektronisches Auge abgebildet.",
+    answers: ["Camera", "Überwachungskameras", "Kamera", "Kameras", "Überwachungskamera", "Camera Security", "Videoüberwachung"],
+    solved: "Kameras – Volltreffer! Gaston hat auf der Rückseite der Skizze notiert: 'Perfekt, Sicherheit und Schutz für wertvolle Stücke sind notiert! Aber wer nur auf kleine Brunnenfiguren starrt, übersieht den größten Prunk der Stadt. Für mein nächstes Design-Element brauche ich Rhythmus, Gold und architektonische Wucht. Auf zum schönsten Wohnzimmer der Stadt!'",
     nextCoords: {lat:"50.846733", lon:"4.352472", label:"Grote Markt (Grand-Place)", distKm:"0,3"}
   },
   {
     distFromPrev: "0,3",
-    scene: "Kaum habt ihr den Platz betreten, bleibt euch fast die Spucke weg – vor lauter Gold, Schnörkeln und architektonischem Größenwahn. Hier auf dem Grote Markt glänzt selbst der Schatten noch irgendwie prunkvoll. Zwischen Touristen, die verzweifelt versuchen, den kompletten Platz auf ein einziges Smartphone-Foto zu quetschen, hockt auf einem vergoldeten Dachsims natürlich wieder Henri, die Taube mit dem übersteigerten Ego. Darunter klebt an einer Laterne ein weiterer Zettel mit dem Enten-Wachssiegel. Monsieur Tintenklecks schreibt: 'Aha! Ihr habt den kleinen Kerl und seine Aufpasser überlistet. Willkommen auf dem schönsten Wohnzimmer der Stadt! Nach dem großen Bombardement von 1695 wurden die Zunfthäuser hier in Rekordzeit wieder aufgebaut – fast so, als hätten die Baumeister Angst gehabt, jemand könnte ihnen die Show stehlen.' <br><br> Henri behauptet frech, 'Was ist der Unterschied zwischen dem Grote Markt in Brüssel und einem unordentlichen Kinderzimmer? Auf dem Grote Markt stehen die Häuser in Reih und Glied – im Kinderzimmer sind sie nur Grote-schlecht aufgeräumt!' An welchem Gebäude dieses Platzes befindet sich der berühmte, fast 96 Meter hohe gotische Turm?'",
-    onsite: "Schaut euch auf dem Grote Markt um und findet das Gebäude mit dem markanten, spitzen gotischen Turm (nicht zu verwechseln mit dem gegenüberliegenden Königshaus / Brotmuseum).",
-    riddle: "Wie heißt das historische Gebäude auf dem Grote Markt, zu dem der berühmte, rund 96 Meter hohe gotische Turm gehört?",
-    hint: "Es ist der Sitz der Stadtverwaltung – auf Niederländisch heißt es 'Stadhuis' und auf Französisch 'Hôtel de Ville'.",
-    answers: ["Rathaus", "Stadhuis", "Hotel de Ville", "Hôtel de Ville", "Brüsseler Rathaus"],
-    solved: "Rathaus – genau das ist es! Henri schnaubt verächtlich und rutscht ein Stück auf dem Sims zur Seite. Auf der Rückseite des Zettels kritzelte Gaston hastig weiter: 'Sehr gut! Aber denkt bloß nicht, der kleine Bronzejunge sei hier die einzige Kuriosität. Ganz in der Nähe versteckt sich ein weibliches Pendant – etwas tiefer gelegt, hinter einem Gitter und mit ganz eigenem Charme. Auf zur nächsten Station!'",
+    scene: "Kaum habt ihr den Platz betreten, bleibt euch fast die Spucke weg – vor lauter Gold, Schnörkeln und prunkvollen Giebeln. Nach dem großen Bombardement von 1695 wurden die Zunfthäuser hier in Rekordzeit wieder aufgebaut. An einer Laterne steckt Gastons nächste Skizze, die rhythmische Holzstreben mit einem goldenen Blickfang zeigt: 'Hier stimmt der Rhythmus! Fassade reiht sich an Fassade, und doch hat jedes Haus seinen eigenen Charakter. Für mein Möbelstück will ich diese klare Wiederholung mit einem dramatischen Highlight ganz oben an der Spitze krönen!'",
+    onsite: "Schaut euch auf dem Grote Markt um, sucht das Gebäude mit dem höchsten, spitzen gotischen Turm (das Rathaus) und richtet euren Blick ganz nach oben auf die goldene Wetterfahnen-Statue auf der Turmspitze.",
+    riddle: "Auf der Spitze des Rathausturms steht der Erzengel Michael in Gold. Wen oder was tritt er dort unter seinen Füßen platt?",
+    hint: "Es ist das klassische Symbol des Bösen – eine geflügelte Kreatur mit Hörnern bzw. ein Drache.",
+    answers: ["Teufel", "Den Teufel", "Drache", "Drachen", "Satan", "Dämon"],
+    solved: "Den Teufel (bzw. einen Drachen) – genau richtig! Auf der Rückseite seiner Skizze hat Gaston hastig weitergeschrieben: 'Ein dramatischer Kontrast für die Krone meines Entwurfs – notiert! Doch gutes Design braucht nicht nur große Gesten, sondern auch fließende Übergänge und den Mut, mal in eine ganz enge Ecke abzubiegen. Folgt mir in eine unscheinbare Sackgasse!'",
     nextCoords: {lat:"50.848500", lon:"4.354056", label:"Jeanneke Pis", distKm:"0,3"}
   },
   {
     distFromPrev: "0,3",
-    scene: "Ihr biegt in eine Sackgasse ein, die so schmal ist, dass man sich fast gegenseitig auf die Füße tritt – die 'Impasse de la Fidélité', zu Deutsch: Sackgasse der Treue. Und genau hier hockt sie: Jeanneke Pis, die freche kleine Schwester von Manneken Pis! Während ihr berühmter Bruder schon seit Jahrhunderten posiert, wurde Jeanneke erst 1987 eingeweiht – quasi als späte Antwort in Sachen Gleichberechtigung. Oben auf dem Gitter thront natürlich wieder Henri, die Taube mit dem Größenwahn, und beäugt misstrauisch die Münzen im Wasserbecken. Direkt darunter klebt Gastons nächster Zettel mit dem Enten-Siegel: 'Willkommen in der wohl ehrlichsten Sackgasse Brüssels! Manche werfen hier Münzen ins Wasser, um sich ewige Treue zu wünschen – ich habe hier lieber meinen nächsten Hinweis versteckt. Doch Henri hat meine Notiz verschmiert! Schaut genau auf den Brunnen: In was für eine markante Form plätschert das Wasser direkt unter Jeanneke hinein?'",
-    onsite: "Geht bis zum Ende der Sackgasse (Impasse de la Fidélité) und auf das Becken direkt unter der hockenden Jeanneke-Pis-Statue.",
-    riddle: "In welche markante Form aus Stein plätschert das Wasser direkt unter der Statue von Jeanneke Pis?",
-    hint: "Schaut genau auf das kleine Auffangbecken direkt vor ihren Füßen – es hat die geriffelte Form eines bekannten Meerestiers bzw. einer Schale vom Strand.",
+    scene: "Ihr biegt in eine Sackgasse ein, die so schmal ist, dass man sich fast gegenseitig auf die Füße tritt – die 'Impasse de la Fidélité', zu Deutsch: Sackgasse der Treue. Und genau hier hockt sie: Jeanneke Pis, die freche kleine Schwester von Manneken Pis, die erst 1987 eingeweiht wurde. Am Gitter klebt Gastons nächste Zeichnung – diesmal mit weichen, geschwungenen Linien: 'Manchmal muss man die Perspektive wechseln, um eine frische Form zu finden! Schaut, wie hier Wasser und Stein zusammenspielen – genau so organisch und fließend soll die Sitz- oder Ablagefläche meines Möbelstücks geformt sein!'",
+    onsite: "Geht bis zum Ende der Sackgasse (Impasse de la Fidélité) und schaut direkt auf das kleine steinerne Auffangbecken unter der hockenden Jeanneke-Pis-Statue.",
+    riddle: "In welche markante, geriffelte Form aus Stein plätschert das Wasser direkt unter der Statue von Jeanneke Pis hinein?",
+    hint: "Das kleine Becken direkt vor ihren Füßen hat die typische, geriffelte Form einer Schale, die man am Strand findet.",
     answers: ["Muschel", "Jakobsmuschel", "Muschelschale", "Eine Muschel"],
-    solved: "Eine Muschel – ganz genau! Henri plustert empört die Federn auf, als hätte er selbst die Münzen im Becken bewacht. Auf der Rückseite von Gastons Notiz steht bereits der nächste Streich: 'Großartig! Ihr habt bewiesen, dass ihr euch nicht von prunkvollen Fassaden blenden lasst und auch in den kleinsten Ecken Brüssels den Durchblick behaltet. Jetzt wird es bunt, laut und herrlich überzeichnet – denn in Belgien sind Comics keine Kinderkram-Sache, sondern hohe Kunst. Auf zu den Helden aus Tinte und Sprechblasen!'",
+    solved: "Eine Muschel – ganz genau! Auf der Rückseite der Skizze steht Gastons nächster Geistesblitz: 'Diese geschwungene Form wird das Herzstück meines Entwurfs! Jetzt fehlt mir nur noch eine Prise Humor und Leichtigkeit – denn ein Möbelstück darf ruhig zum Schmunzeln anregen. In Belgien sind Comics schließlich hohe Kunst!'",
     nextCoords: {lat:"50.846111", lon:"4.355611", label:"Brussel COMICS figurines Museum (MOOF)", distKm:"0,4"}
   },
   {
     distFromPrev: "0,4",
-    scene: "Willkommen im Paradies der Sprechblasen! In Belgien sind Comics keine bloße Kinderlektüre, sondern die berühmte 'Neunte Kunst' – schließlich stammen Legenden wie Tim und Struppi, die Schlümpfe, Lucky Luke und das Marsupilami genau von hier. Hier beim Brussel COMICS figurines Museum (MOOF) wird aus gezeichneter Fantasie plötzlich dreidimensionale Wirklichkeit. Auf einem Schaukasten hockt natürlich wieder Henri, die freche Stadttaube, und versucht verzweifelt, einer Comic-Figur das Kaugummi aus dem Gesicht zu picken. Direkt daneben hängt Gastons neuer Brief: 'Ha! Ihr habt die Sackgasse überlebt! Wisst ihr, eigentlich wollte ich dieses Rätsel hier von meinem 5-jährigen Neffen Jaro testen lassen. Großer Fehler: Jaro hat sofort gefragt, warum hier keine Pokemon sind, drei Gummibärchen an der Scheibe plattgedrückt und erklärt, er sei jetzt selbst der Chef-Detektiv – immerhin hat er die Figuren hier schneller erkannt als ich meine Lesebrille! Schaut euch im Eingangsbereich oder an den Schaufenstern der Galerie Horta um: Welche kleinen blauen Comic-Wesen aus der Feder des belgischen Zeichners Peyo begrüßen hier fast überall die Besucher?'",
-    onsite: "Schaut euch rund um den Eingang des Brussel COMICS figurines Museums (MOOF) in der Galerie Horta bzw. in den Schaufenstern um und achtet auf die bekannten belgischen Comic-Figuren.",
-    riddle: "Wie heißen die berühmten kleinen, blauen Comic-Figuren mit den weißen Mützen, die vom belgischen Zeichner Peyo erfunden wurden und hier im Museum überall auftauchen?",
+    scene: "Willkommen im Paradies der Sprechblasen! In Belgien sind Comics keine bloße Kinderlektüre, sondern die berühmte 'Neunte Kunst' – schließlich stammen Legenden wie Tim und Struppi, Lucky Luke oder das Marsupilami genau von hier. Beim Brussel COMICS figurines Museum (MOOF) hängt Gastons nächste Notiz samt einer verspielten Skizze mit abgerundeten Kanten: 'Warum sollte ein Möbelstück streng und langweilig sein, wenn man auch mit einem Augenzwinkern bauen kann? Hier hole ich mir die Inspiration für fröhliche Farbakzente und spielerische Rundungen!'",
+    onsite: "Schaut euch rund um den Eingang des Brussel COMICS figurines Museums (MOOF) in der Galerie Horta bzw. an den Schaufenstern um und achtet auf die bekannten belgischen Comic-Figuren.",
+    riddle: "Welche berühmten kleinen, blauen Comic-Wesen mit weißen Mützen aus der Feder des belgischen Zeichners Peyo begrüßen hier fast überall die Besucher?",
     hint: "Sie sind nur 'drei Äpfel hoch', wohnen in Pilzhäusern und heißen auf Französisch 'Les Schtroumpfs'.",
     answers: ["Schlümpfe", "Die Schlümpfe", "Schtroumpfs", "Smurfs", "Schlumpf"],
-    solved: "Die Schlümpfe – absolut richtig! Sogar der 5-jährige Jaro wäre beeindruckt. Henri flattert beleidigt auf ein Schild, während auf der Rückseite von Gastons Zettel die nächste Botschaft erscheint: 'Sehr gut! Genug bunte Sprechblasen für heute – jetzt wird es wieder majestätisch, hoch und ehrwürdig. Folgt den Spuren weiter zur großen Hauptkirche Brüssels, wo einst Könige gekrönt und geheiratet haben!'",
+    solved: "Die Schlümpfe – absolut richtig! Auf der Rückseite des Blatts hat Gaston bereits die nächste Etappe skizziert: 'Ein kräftiger blauer Farbakzent ist gebucht! Jetzt brauche ich allerdings das genaue Gegenteil: stolze Höhe, aufrechte Linien und majestätische Ruhe. Auf zur großen Hauptkirche Brüssels!'",
     nextCoords: {lat:"50.847850", lon:"4.359139", label:"Kathedrale St. Michael und St. Gudula", distKm:"0,4"}
   },
   {
     distFromPrev: "0,4",
-    scene: "Vor euch ragt die Kathedrale St. Michael und St. Gudula auf dem Treurenberg in den Himmel – jahrhundertelang gebaut (ab 1226) und heute Schauplatz königlicher Hochzeiten und Staatsbegräbnisse. Oben auf einem steinernen Sims sitzt natürlich wieder Henri, die Taube mit dem übersteigerten Ego, und schaut herab, als gehöre ihm die gesamte Kirche. Daneben klebt Gastons nächste Notiz mit dem Enten-Siegel: 'Willkommen in den hohen Weihen Brüssels! In den rund 69 Meter hohen Türmen hängen übrigens rund 50 Glocken, darunter das große Glockenspiel. Doch im Gegensatz zu vielen spitzen Kathedralen enden diese beiden Haupttürme an der Frontseite oben recht flach. Wie viele große Türme prägen die Westfassade der Kathedrale?'",
-    onsite: "Stellt euch vor die Westfassade der Kathedrale St. Michael und St. Gudula (oben an der breiten Freitreppe) und zählt die beiden großen Türme, die das Portal einrahmen.",
-    riddle: "Wie viele Türme hat die Westfassade der Kathedrale St. Michael und St. Gudula?",
-    hint: "Schaut nach oben auf die Frontseite der Kirche links und rechts vom Mittelteil – es sind genau zwei markante Türme ohne hohe Spitzen.",
+    scene: "Vor euch ragt die Kathedrale St. Michael und St. Gudula auf dem Treurenberg in den Himmel – ab 1226 erbaut und heute Schauplatz königlicher Hochzeiten und Staatsbegräbnisse. An einem Steinpfosten klebt Gastons Skizze von hohen, schlanken Vertikalstreben: 'Wenn ich hier nach oben schaue, spüre ich diese beeindruckende Vertikale! In den rund 69 Meter hohen Haupttürmen hängen übrigens etwa 50 Glocken. Mein Möbelstück braucht genau solche klaren, nach oben strebenden Linien – allerdings ohne spitze Ecken, an denen man sich stößt!'",
+    onsite: "Stellt euch oben auf die breite Freitreppe vor der Westfassade der Kathedrale und betrachtet die Gesamtfront mit dem Portal und den großen Türmen.",
+    riddle: "Wie viele große, oben flach abschließende Haupttürme prägen die Westfassade der Kathedrale St. Michael und St. Gudula?",
+    hint: "Schaut nach oben auf die Frontseite der Kirche links und rechts vom Mittelteil – es sind genau zwei markante Türme ohne spitze Helme.",
     answers: ["2", "zwei", "Zwei"],
-    solved: "2 Türme – Volltreffer! Henri verdreht die Augen, als hätte er selbst die Baupläne gezeichnet. Auf der Rückseite von Gastons Zettel steht der nächste Hinweis: 'Sauber gezählt! Jetzt verlassen wir die himmlischen Höhen und steuern auf einen Ort zu, der wie ein gepflegter Hügel voller Kunst, Gärten und Aussicht wirkt – der perfekte Platz, um den Blick schweifen zu lassen, bevor es royal wird!'",
+    solved: "2 Türme – Volltreffer! Gaston hat auf der Rückseite vermerkt: 'Zwei starke, flach abschließende Seitenwangen geben meinem Entwurf den perfekten Halt! Jetzt verlasse ich die himmlischen Höhen und suche nach Weite, Ordnung und klaren Ebenen, damit mein Möbelstück im Raum nicht erdrückend wirkt.'",
     nextCoords: {lat:"50.8435", lon:"4.357333", label:"Kunstberg (Mont des Arts)", distKm:"0,5"}
   },
   {
     distFromPrev: "0,5",
-    scene: "Ihr erreicht den Kunstberg – ein monumentales Projekt, das auf eine Idee von König Leopold II. zurückgeht und schließlich zwischen 1956 und 1958 passend zur Brüsseler Weltausstellung (Expo 58) fertiggestellt wurde. Wo einst ein dichtes, verwinkeltes Altstadtviertel stand, erstreckt sich heute diese symmetrische Garten- und Museumslandschaft mit weitem Blick bis zum Rathausturm. Auf einem Geländer klebt Gastons nächster Zettel mit dem Enten-Siegel: 'Willkommen auf dem Balkon der Künste! Hier oben fühlt man sich fast wie ein König – zumindest bis man merkt, dass die einzigen Untertanen hier aus Buchsbaum geschnitten sind. Übrigens: König Leopold II. wollte hier einst eine prachtvolle Kulturmeile schaffen, und zur Expo 58 bekam Brüssel schließlich dieses architektonische Gesamtkunstwerk. Schaut euch den markanten Brunnen mit seinen Säulen genauer an: Die Säulen repräsentieren die Provinzen im historischen Aufbau Belgiens. Wie viele sind es insgesamt?'",
-    onsite: "Geht durch die Gartenanlage des Kunstbergs und schaut euch den Brunnen mit den Säulen an.",
-    riddle: "Wie viele Säulen stehen in diesem Brunnen am Kunstberg?",
-    hint: "Bis zur Verwaltungsreform im Jahr 1995 bestand Belgien nicht aus zehn, sondern aus genau neun dieser regionalen Verwaltungsgebiete.",
+    scene: "Ihr erreicht den Kunstberg – ein monumentales Projekt, das auf König Leopold II. zurückgeht und zwischen 1956 und 1958 passend zur Weltausstellung (Expo 58) fertiggestellt wurde. Wo einst ein dichtes Altstadtviertel stand, erstreckt sich heute diese symmetrische Gartenlandschaft mit weitem Blick bis zum Rathausturm. An einem Geländer hängt Gastons Grundriss-Skizze mit klaren Achsen: 'Hier oben verbindet sich geplante Ordnung mit weitem Blick! Mein Entwurf braucht offene Fächer und eine durchdachte Aufteilung nach historischem Vorbild.'",
+    onsite: "Geht durch die symmetrische Gartenanlage des Kunstbergs und sucht den Brunnen mit den markanten steinernen Säulen.",
+    riddle: "Die Säulen in diesem Brunnen repräsentieren die Provinzen im historischen Aufbau Belgiens. Wie viele Säulen stehen hier insgesamt im Brunnen?",
+    hint: "Bis zur Teilung von Brabant im Jahr 1995 bestand Belgien nicht aus zehn, sondern aus genau neun dieser Provinzen.",
     answers: ["9", "neun", "Neun"],
-    solved: "9 für die 9 belgischen Provinzen – Volltreffer! (Seit der Teilung von Brabant im Jahr 1995 sind es übrigens zehn, aber der Brunnen hält die historische Neun fest.) Auf der Rückseite von Gastons Notiz steht bereits der nächste Hinweis: 'Historisch absolut sattelfest! Nur ein paar Schritte weiter oben erwartet euch der Place Royale – schnurgerade, klassizistisch und der direkte Vorhof zur königlichen Macht!'",
+    solved: "9 Säulen für die 9 historischen Provinzen – Volltreffer! Auf der Rückseite der Skizze steht Gastons nächster Gedanke: 'Neun sauber aufgeteilte Fächer – das sorgt für perfekte Ordnung! Nur ein paar Schritte weiter oben erwartet mich nun ein Platz, der mir zeigt, wie man strenge Symmetrie und klassische Eleganz miteinander verbindet.'",
     nextCoords: {lat:"50.842389", lon:"4.359583", label:"Place Royale", distKm:"0,2"}
   },
   {
     distFromPrev: "0,2",
-    scene: "Ihr tretet auf den Place Royale – einen schnurgeraden, hellen Platz im klassizistischen Stil, der ab dem späten 18. Jahrhundert entstand und auf dem 1831 der erste belgische König Leopold I. seinen Eid ablegte. Mitten auf dem Platz thront das große Reiterdenkmal von Gottfried von Bouillon. An einer Steinbank klebt Gastons nächste Notiz mit dem Enten-Siegel: 'Willkommen auf dem Platz der großen Auftritte! Wusstet ihr eigentlich, wie Königin Caro Pups-Weltmeisterin geworden ist? Sie hat beim königlichen Finale so kraftvoll durchgeladen, dass selbst die Fahnenstangen am Platz im Takt gewackelt haben und die Jury vor Ehrfurcht die Kronen schief setzte! Aber genug royaler Luftzug: Auf dem Sockel des Reiterstandbilds klebt eine Bronzetafel mit alten Inschriften. Lest genau nach, wo der gute Mann geboren wurde – bevor Caro hier noch einen Rekord im Luftverpesten aufstellt!'",
-    onsite: "Geht zum Sockel des Reiterstandbilds in der Mitte des Place Royale und lest die Inschrift auf der Bronzetafel (achtet besonders auf die Zeile mit 'GEBOREN TE ...').",
+    scene: "Ihr tretet auf den Place Royale – einen schnurgeraden, hellen Platz im klassizistischen Stil, der ab dem späten 18. Jahrhundert entstand und auf dem 1831 der erste belgische König Leopold I. seinen Eid ablegte. An einer Steinbank klebt Gastons nächste Konstruktionszeichnung voller sauberer Winkel: 'Manchmal braucht ein kühner Entwurf ein ruhiges, nobles Fundament. Der Place Royale zeigt, wie edel klare Geometrie und eine zeitlose Inschrift wirken können!'",
+    onsite: "Geht in die Mitte des Place Royale zum Sockel des großen Reiterstandbilds von Gottfried von Bouillon und lest die Inschrift auf der Bronzetafel (achtet auf die Zeile 'GEBOREN TE ...').",
     riddle: "Welcher Geburtsort steht auf der Bronzetafel am Sockel des Reiterstandbilds auf dem Place Royale?",
-    hint: "Schaut auf der Tafel nach der Zeile mit 'GEBOREN TE ...' – der Name des Orts beginnt mit 'B'.",
+    hint: "Schaut auf der Tafel nach der Zeile mit 'GEBOREN TE ...' – der Name des Ortes beginnt mit einem 'B'.",
     answers: ["Baisy", "Baisy in Brabant", "Baisy-Thy", "Baisy in brabant"],
-    solved: "Baisy – super abgelesen! Selbst ohne gefiederte Zuschauer fühlt ihr euch auf dem Platz wie bei einem Staatsakt. Auf der Rückseite von Gastons Notiz folgt der nächste Hinweis: 'Stark gelöst! Nur ein kurzes Stück weiter wartet schon die offizielle Residenz und Repräsentationsstätte des Königshauses – wo Königin Caro ihre Pups-Weltrekorde sicher lieber hinter dicken Mauern trainiert. Auf zum Königlichen Palast!'",
+    solved: "Baisy – super abgelesen! Auf der Rückseite der Zeichnung notierte Gaston zufrieden: 'Eine kleine Messingplakette mit Signatur bekommt mein Möbelstück auf jeden Fall! Jetzt fehlt mir nur noch ein Gefühl für echte Spannweite und Repräsentation. Nur ein kurzes Stück weiter wartet eine der breitesten Fassaden Europas auf uns!'",
     nextCoords: {lat:"50.842655", lon:"4.362706", label:"Königlicher Palast (Palais Royal)", distKm:"0,3"}
   },
   {
     distFromPrev: "0,3",
-    scene: "Vor euch erstreckt sich die breite, klassizistische Fassade des Königlichen Palastes von Brüssel gegenüber dem Warandepark (Parc de Bruxelles). Ein spannendes Detail vorneweg: Obwohl dies der offizielle Amtssitz und Arbeitsplatz des belgischen Königs ist, wohnt die königliche Familie gar nicht hier, sondern im Schloss Laeken im Norden der Stadt. Seine heutige monumentale Gestalt erhielt der Palast Anfang des 20. Jahrhunderts unter König Leopold II. – und seine Fassade ist sogar breiter als die des Buckingham Palace in London. An einem Pfeiler des schmiedeeisernen Zauns steckt Gastons nächste Notiz mit dem Enten-Siegel: 'Willkommen vor dem wohl berühmtesten Arbeitsplatz Belgiens! Hier werden Staatsgäste empfangen, Bankette gegeben und wichtige Entscheidungen unterzeichnet. Doch woran erkennt man schon von außen auf dem Dach des Palastes sofort, ob der König gerade im Land ist und seinen Amtsgeschäften nachgeht?'",
-    onsite: "Stellt euch vor den Königlichen Palast (auf die Seite zum Parc de Bruxelles) und richtet euren Blick ganz nach oben auf die Mitte des Dachs.",
-    riddle: "Welches offizielle Zeichen wird auf dem Dach des Königlichen Palastes gehisst, wenn der König im Land ist?",
-    hint: "Es weht in Schwarz, Gelb und Rot ganz oben am Mast in der Mitte des Palastdachs.",
-    answers: ["Flagge", "Fahne", "Belgische Flagge", "Belgische Fahne", "Die Flagge", "Nationalflagge"],
-    solved: "Die belgische Flagge – ganz genau! Sobald sie oben auf dem Dach weht, ist der Monarch im Land (und jeden Sommer nach dem Nationalfeiertag am 21. Juli öffnet der Palast übrigens sogar seine Türen für Besucher). Auf der Rückseite von Gastons Zettel folgt der nächste Hinweis: 'Ausgezeichnet! Jetzt verlassen wir die königlichen Gemächer und steuern auf ein Bauwerk zu, das bei seiner Einweihung das größte Gebäude der Welt war – und dessen Gerüst in Brüssel selbst schon fast Denkmalschutz genießt. Auf zum Justizpalast!'",
+    scene: "Vor euch erstreckt sich die breite, klassizistische Fassade des Königlichen Palastes gegenüber dem Warandepark. Obwohl dies der offizielle Amtssitz des belgischen Königs ist, wohnt die Familie im Schloss Laeken im Norden der Stadt. Seine monumentale Gestalt erhielt der Palast Anfang des 20. Jahrhunderts unter Leopold II. – seine Fassade ist sogar breiter als die des Buckingham Palace in London. Am schmiedeeisernen Zaun steckt Gastons Seitenansicht-Skizze: 'Was für eine Spannweite! Wenn ein Möbelstück präsenter wirken soll, entscheidet der Rhythmus der tragenden Säulen über Licht und Schatten!'",
+    onsite: "Stellt euch vor den Königlichen Palast (auf die Seite zum Parc de Bruxelles) und betrachtet den zentralen Mittelbau direkt unter dem großen Dreiecksgiebel.",
+    riddle: "Wie viele große, korinthische Säulen tragen direkt nebeneinander den zentralen Mittelbau unter dem Dreiecksgiebel des Königlichen Palastes?",
+    hint: "Zählt die dicken Säulen in der Mitte der Fassade unter dem dreieckigen Giebeldach – es ist eine gerade Zahl zwischen 6 und 10.",
+    answers: ["8", "acht", "Acht"],
+    solved: "8 Säulen – ganz genau! Gaston hat auf der Rückseite vermerkt: 'Acht fein gedrechselte Stützen sorgen für königliche Stabilität! Jetzt fehlt meinem Entwurf nur noch ein mutiges, monumentales Dach-Element und ein weiter Blick über das Ganze. Auf zum wohl gewaltigsten Bauwerk der Stadt!'",
     nextCoords: {lat:"50.837861", lon:"4.352417", label:"Justizpalast (Palais de Justice)", distKm:"1,1"}
   },
   {
     distFromPrev: "1,1",
-    scene: "Schon von weitem türmt sich der Justizpalast auf dem Poelaertplatz auf – ein gewaltiges Bauwerk, das zwischen 1866 und 1883 nach Plänen des Architekten Joseph Poelaert errichtet wurde und bei seiner Fertigstellung zu den größten Gebäuden der Welt zählte. Seine mächtige Kuppel ragt rund 100 Meter in die Höhe, und für das Gebäude brauchte man einst ein eigenes Viertel samt Abriss bestehender Häuser. In Brüssel ist das Bauwerk außerdem berühmt für seine jahrzehntelangen Bau- und Gerüstphasen – so sehr, dass man das endlose Herumbauen im Volksmund sogar 'Poelaertisieren' nennt. An einem der großen Steinpoller vor dem Portal klebt Gastons nächste Notiz mit dem Enten-Siegel: 'Willkommen vor dem monumentalen Tempel der Gerechtigkeit! Hier drin geht es um Paragraphen, Säle und Gänge, in denen man sich ohne Kompass leicht verirrt. Doch schauen wir erst einmal auf seinen Schöpfer und die Form der großen Bekrönung über dem Bauwerk: Wie nennt man den gewölbten Aufbau, der in der Architektur typischerweise über einem zentralen Raum oder Gebäude thront?'",
-    onsite: "Stellt euch auf den Vorplatz des Justizpalastes (Place Poelaert) und schaut nach oben auf die große, gewölbte Dachkonstruktion über dem Mittelteil des Gebäudes.",
-    riddle: "Wie nennt man in der Architektur den halbkugelförmigen bzw. gewölbten Aufbau, der hier hoch über dem Justizpalast thront?",
-    hint: "Das Wort beginnt mit 'K' und reimt sich auf 'Stuppel' (in der Musik) bzw. 'Rumpel' – auf Französisch heißt es 'dôme'.",
-    answers: ["Kuppel", "Die Kuppel", "Dome", "Dôme"],
-    solved: "Die Kuppel – Volltreffer! Über 100 Meter hoch ragt sie über das Viertel hinaus und bietet von hier oben einen fantastischen Blick über die Stadt. Auf der Rückseite von Gastons Zettel folgt nun die letzte Etappe eurer Reise: 'Fast geschafft! Jetzt geht es zum großen Finale an ein historisches Relikt, das einst als Stadttor die mittelalterliche Verteidigung Brüssels sicherte – und heute wie ein kleines Schloss mitten im Park steht. Auf zum Porte de Hal!'",
+    scene: "Schon von weitem türmt sich der Justizpalast auf dem Poelaertplatz auf – ein gewaltiges Bauwerk, das zwischen 1866 und 1883 von Joseph Poelaert errichtet wurde und damals zu den größten Gebäuden der Welt zählte. Seine Kuppel ragt rund 100 Meter auf, und wegen der jahrzehntelangen Gerüstphasen nennt man endloses Bauen in Brüssel sogar 'Poelaertisieren'. An einem Steinpoller klebt Gastons Perspektiv-Skizze: 'Dieser Bau ist ein Riese aus Stein – und doch lohnt sich von hier oben der weite Blick über die Stadt. Mein Möbelstück soll robust sein, aber immer den Blick in die Ferne offenhalten!'",
+    onsite: "Stellt euch auf die Aussichtsterrasse am Place Poelaert, dreht dem Justizpalast den Rücken zu und blickt weit hinaus über die Dächer Brüssels Richtung Horizont.",
+    riddle: "Welches berühmte, futuristische Brüsseler Wahrzeichen aus neun silbernen Kugeln könnt ihr bei klarer Sicht von hier oben am Horizont entdecken?",
+    hint: "Es wurde genau wie der Kunstberg für die Weltausstellung Expo 58 gebaut und stellt ein 165-milliardenfach vergrößertes Eisenkristall dar.",
+    answers: ["Atomium", "Das Atomium"],
+    solved: "Das Atomium – Volltreffer! Gaston hat auf der Rückseite notiert: 'Ein futuristischer Glanzpunkt als Knauf oder Griff rundet die Sache ab! Jetzt habe ich alle Einzelteile im Kopf – fehlt nur noch der letzte Schliff an einem Ort, der Mittelalter und Neuzeit miteinander vereint. Auf zur letzten Station!'",
     nextCoords: {lat:"50.833269", lon:"4.344960", label:"Porte de Hal (Halletor)", distKm:"1,3"}
   },
   {
     distFromPrev: "1,3",
-    scene: "Am Ziel angekommen steht vor euch das Porte de Hal (Halletor) – das letzte noch erhaltene Stadttor der zweiten Brüsseler Befestigungsmauer aus dem 14. Jahrhundert. Ursprünglich ab 1381 als Teil der Stadtverteidigung errichtet, diente das Bauwerk im Lauf der Jahrhunderte unter anderem als Gefängnis sowie als Lagerhaus und erhielt im 19. Jahrhundert unter Architekt Hendrik Beyaert sein heutiges, märchenhaft-neugotisches Aussehen. Umgeben von den Grünanlagen wirkt es fast wie ein kleines Schloss am Rand der Innenstadt. Unten am Eingangstor klebt der letzte Zettel mit dem Enten-Wachssiegel: 'Geschafft! Ihr habt euch von der Altstadt über den Kunstberg und die königliche Bühne bis hierher durchgearbeitet. Bevor wir den Deckel auf dieses Abenteuer machen, schaut euch das Tor genau an: Es besitzt einen wehrhaften Wehrgang mit kleinen Öffnungen oben an den Mauern, durch die früher gezielt nach unten geschaut oder geworfen werden konnte. Wie nennt man solche schlitz- oder fensterartigen Öffnungen in einer Wehrmauer?'",
-    onsite: "Stellt euch vor das Porte de Hal und betrachtet den oberen Mauerbereich des Stadttors mit seinen wehrhaften Elementen.",
-    riddle: "Wie nennt man die schmalen Öffnungen bzw. Schlitze in einer Wehrmauer oder Burg, durch die man geschützt nach außen blicken oder schießen konnte?",
-    hint: "Das Wort beginnt mit 'S' und endet auf '-scharte'.",
-    answers: ["Schießscharte", "Schiessscharte", "Schießscharten", "Schiessscharten"],
-    solved: "Schießscharte – Punktlandung! Damit ist die gesamte Rallye erfolgreich gemeistert. Auf der Rückseite des letzten Zettels hat Monsieur Tintenklecks ein kleines Abschiedswort hinterlassen: 'Herzlichen Glückwunsch, liebe Spürnasen! Ihr habt alle Stationen gemeistert, keine falsche Abzweigung genommen und Brüssel von seinen schrägsten bis zu seinen geschichtsträchtigsten Seiten erlebt. Ich bin dann mal weiter – vielleicht wartet die nächste Idee schon am nächsten Eck!'",
+    scene: "Am Ziel angekommen steht vor euch das Porte de Hal (Halletor) – das letzte erhaltene Stadttor der zweiten Befestigungsmauer aus dem 14. Jahrhundert (ab 1381). Später diente es als Gefängnis und Lagerhaus, bevor Architekt Hendrik Beyaert ihm im 19. Jahrhundert sein heutiges, märchenhaft-neugotisches Aussehen gab. Unten am Eingangstor klebt der letzte Zettel vor dem großen Finale: 'Geschafft! Alt und neu in einem Bauwerk – genau das macht zeitloses Design aus! Bevor ich euch meine fertige Möbel-Skizze enthülle, schaut noch einmal ganz genau nach oben an die Türmchen des Tors!'",
+    onsite: "Stellt euch vor das Porte de Hal und schaut ganz nach oben zu den steilen Dächern und den kleinen runden Ecktürmchen an der Fassade.",
+    riddle: "Wie viele kleine, runde Erkertürmchen hängen wie Schwalbennester oben links und rechts an den Ecken der Vorderfassade des Hauptturms?",
+    hint: "Blickt an der Vorderseite des großen Torturms nach oben zu den Dachkanten – links und rechts hängt jeweils ein kleines rundes Türmchen.",
+    answers: ["2", "zwei", "Zwei"],
+    solved: "2 kleine Ecktürmchen – Punktlandung! Damit habt ihr alle Design-Hinweise gesammelt und die gesamte Tour gemeistert. <br><br> <strong>Das große Finale:</strong> Als ihr den letzten Umschlag öffnet, entfaltet sich vor euch <strong>Monsieur Gaston Tintenklecks’ fertige Design-Skizze</strong>: ein einzigartiges Brüsseler Meisterstück! Es verbindet die kompakten Proportionen von Manneken Pis mit der geschwungenen Muschelform von Jeanneke, dem rhythmischen Gold-Glanz des Grote Markts, einem augenzwinkernden Schlumpf-Blau, den stolzen Vertikalen der Kathedrale, neun geordneten Kunstberg-Fächern, königlichen Säulen und einem futuristischen Atomium-Knauf. <br><br> Darunter steht Gastons Widmung: <em>'Danke, dass ihr mit mir hingeschaut habt! Ein gutes Design entsteht nicht am Schreibtisch allein – sondern wenn man mit offenen Augen durch die Welt geht. Jetzt habt ihr euch eine Pause (und echte belgische Waffeln) verdient!'</em>",
     nextCoords: null
   }
 ];
 
-const FINAL_STORY = "Herzlichen Glückwunsch – ihr habt Brüssel überlebt, ohne unterwegs im Justizpalast verloren zu gehen oder ein einziges Rätsel an den Schabernack zu verlieren! Am Ende steht ihr nun vor dem alten Stadttor und wartet auf die große Enthüllung, die Monsieur Gaston Tintenklecks so dramatisch angekündigt hat. Doch als ihr den letzten Umschlag öffnet, findet ihr statt einer  geheimen Weltformel vor allem eines: einen Zettel voller Tintenspritzer, verkrakelter Skizzen und einer ehrlichen Beichte. Gaston hat nämlich beim Schreiben seines „absolut legendären Geheimnisses“ schlicht vergessen, wo er die eigentliche Auflösung hingelegt hat – und ob das große Finale nun im Schloss, im Comic-Heft oder in einer Keksdose steckt. Dafür ist längst klar, was das wahre Geheimnis dieser Tour war: Ihr habt euch durch ein Brüssel voller Kontraste geschlagen – von frechen Bronzefiguren und prunkvollen Fassaden über bunte Sprechblasen und königliche Kulissen bis hin zu monumentaler Geschichte. Falls Monsieur Tintenklecks irgendwann wieder einfällt, was er eigentlich verheimlichen wollte, schickt er euch bestimmt die nächste Schnitzeljagd. Bis dahin gilt: Tief durchatmen, Füße hochlegen – und das nächste Abenteuer in Brüssel kommt bestimmt!";
+const FINAL_STORY = "Geschafft! Ihr habt Brüssel mit offenen Augen erlebt – von winzigen Details bis zu gewaltigen Bauwerken, von verspielten Comics bis zu klarer Architektur.<br><br>Als ihr den letzten Umschlag öffnet, liegt darin keine leere Versprechung, sondern Monsieur Gaston Tintenklecks’ fertige Design-Skizze: ein Möbelstück, das so vielseitig ist wie Brüssel selbst. Es verbindet klare Linien mit einem Augenzwinkern, bietet genug Platz für geheime Ideen und steht fest auf seinen Beinen. <br><br>Gaston hat darunter notiert: <br><br>'Danke, dass ihr mit mir hingeschaut habt. Ein gutes Design entsteht nicht am Schreibtisch allein – sondern wenn man neugierig durch die Welt geht. Jetzt habt ihr euch eine Pause verdient!'";
 
 /* ============================================================
    APP-LOGIK
